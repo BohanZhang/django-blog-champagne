@@ -19,3 +19,4 @@ class Posts(models.Model):
 
     class Meta:
         verbose_name_plural = '博客'
+        ordering = ['-create_date', '-modify_date']
