@@ -2,6 +2,8 @@
 
 {% block title %}楚狂人 | 我本楚狂人，凤歌笑孔丘{% endblock %}
 
+{% block body-class %}home blog single-author two-column right-sidebar{% endblock %}
+
 {% block site-header %}
 			<hgroup>
 				<h1 id="site-title"><span><a href="/" title="楚狂人" rel="home">楚狂人</a></span></h1>
@@ -35,61 +37,40 @@
 
 		<div id="primary">
 			<div id="content" role="main">
-	
-	<article id="post-5" class="post-5 post type-post status-publish format-standard hentry category-uncategorized">
-		<header class="entry-header">
-						<h1 class="entry-title"><a href="http://127.0.0.1/wordpress/?p=5" title="链向 开始写博客系统 的固定链接" rel="bookmark">开始写博客系统</a></h1>
-			
-						<div class="entry-meta">
-				<span class="sep">发表于 </span><a href="http://127.0.0.1/wordpress/?p=5" title="下午 9:57" rel="bookmark"><time class="entry-date" datetime="2012-07-04T21:57:57+00:00" pubdate="">2012 年 7 月 4 日</time></a><span class="by-author"> <span class="sep"> 由 </span> <span class="author vcard"><a class="url fn n" href="http://127.0.0.1/wordpress/?author=1" title="查看所有由 张伯函 发布的文章" rel="author">张伯函</a></span></span>			</div><!-- .entry-meta -->
-			
-						<div class="comments-link">
-				<a href="http://127.0.0.1/wordpress/?p=5#respond" title="《开始写博客系统》上的评论"><span class="leave-reply">回复</span></a>			</div>
-					</header><!-- .entry-header -->
-
-				<div class="entry-content">
-			<p>开始写一个基本Django的仿WordPress的博客，直接开始，好或者不好让大家去评说。加油，伯函</p>
-					</div><!-- .entry-content -->
-		
-		<footer class="entry-meta">
-												<span class="cat-links">
-				<span class="entry-utility-prep entry-utility-prep-cat-links">发表在</span> <a href="http://127.0.0.1/wordpress/?cat=1" title="查看 未分类 中的全部文章" rel="category">未分类</a>			</span>
-									
-									<span class="sep"> | </span>
-						<span class="comments-link"><a href="http://127.0.0.1/wordpress/?p=5#respond" title="《开始写博客系统》上的评论"><span class="leave-reply">发表回复</span></a></span>
-			
-					</footer><!-- #entry-meta -->
-	</article><!-- #post-5 -->
-
+	{% for post in posts %}
+		<article id="post-{{ post.id }}" class="post type-post status-publish format-standard hentry category-uncategorized">
+			<header class="entry-header">
+							<h1 class="entry-title"><a href="/page/{{ post.id }}/" title="链向 {{ post.title }} 的固定链接" rel="bookmark">{{ post.title }}</a></h1>
 				
-					
-	<article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
-		<header class="entry-header">
-						<h1 class="entry-title"><a href="http://127.0.0.1/wordpress/?p=1" title="链向 世界，你好！ 的固定链接" rel="bookmark">世界，你好！</a></h1>
-			
-						<div class="entry-meta">
-				<span class="sep">发表于 </span><a href="http://127.0.0.1/wordpress/?p=1" title="下午 1:49" rel="bookmark"><time class="entry-date" datetime="2012-07-02T13:49:44+00:00" pubdate="">2012 年 7 月 2 日</time></a><span class="by-author"> <span class="sep"> 由 </span> <span class="author vcard"><a class="url fn n" href="http://127.0.0.1/wordpress/?author=1" title="查看所有由 张伯函 发布的文章" rel="author">张伯函</a></span></span>			</div><!-- .entry-meta -->
-			
-						<div class="comments-link">
-				<a href="http://127.0.0.1/wordpress/?p=1#comments" title="《世界，你好！》上的评论">1</a>			</div>
-					</header><!-- .entry-header -->
-
-				<div class="entry-content">
-			<p>欢迎使用 WordPress。这是系统自动生成的演示文章。编辑或者删除它，然后开始您的博客！</p>
-					</div><!-- .entry-content -->
-		
-		<footer class="entry-meta">
-												<span class="cat-links">
-				<span class="entry-utility-prep entry-utility-prep-cat-links">发表在</span> <a href="http://127.0.0.1/wordpress/?cat=1" title="查看 未分类 中的全部文章" rel="category">未分类</a>			</span>
-									
-									<span class="sep"> | </span>
-						<span class="comments-link"><a href="http://127.0.0.1/wordpress/?p=1#comments" title="《世界，你好！》上的评论"><b>1</b> 条回复</a></span>
-			
-					</footer><!-- #entry-meta -->
-	</article><!-- #post-1 -->
-
+							<div class="entry-meta">
+					<span class="sep">发表于 </span><a href="/page/{{ post.id }}/" title="{{ post.modify_date|date:'H:i' }}" rel="bookmark"><time class="entry-date" pubdate>{{ post.modify_date|date:"Y 年 m 月 d 日" }}</time></a>
+					<span class="by-author"> <span class="sep"> 由 </span> <span class="author vcard"><a class="url fn n" href="http://127.0.0.1/wordpress/?author=1" title="查看所有由 {{ post.user.first_name }} 发布的文章" rel="author">{{ post.user.first_name }}</a></span></span>		</div><!-- .entry-meta -->
 				
+							<div class="comments-link">
+								<a href="/page/{{ post.id }}/#comment" title="《{{ post.title }}》上的评论"><span class="leave-reply">回复</span>1</a>			
+							</div>
+						</header><!-- .entry-header -->
+
+					<div class="entry-content">
+				<p>{{ post.content }}</p>
+						</div><!-- .entry-content -->
+			
+			<footer class="entry-meta">
+													<span class="cat-links">
+					<span class="entry-utility-prep entry-utility-prep-cat-links">发表在</span> <a href="http://127.0.0.1/wordpress/?cat=1" title="查看 未分类 中的全部文章" rel="category">未分类</a>			</span>
+										
+										<span class="sep"> | </span>
+							<span class="comments-link"><a href="/page/{{ post.id }}/#respond" title="《{{ post.title }}》上的评论"><span class="leave-reply">
+								{% if post.commit %}
+									<b>{{ post.commit }}</b>条回复
+								{% else %}
+									发表回复
+								{% endif %}
+							</span></a></span>
 				
+						</footer><!-- #entry-meta -->
+		</article>
+	{% endfor %}
 			
 			</div><!-- #content -->
 		</div><!-- #primary -->

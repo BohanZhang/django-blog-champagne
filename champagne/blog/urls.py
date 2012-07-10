@@ -3,4 +3,5 @@ import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index),
+    url(r'^page/(?P<page>\d+)/$', views.page),
 )
