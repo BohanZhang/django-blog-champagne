@@ -57,3 +57,29 @@ if (window.webkitNotifications)
         }
     })();
 }
+$(function() {
+	$("#submit").bind("click",function(e) {
+		post_id = $("#comment_post_ID").attr("value");
+		author = $("#author").attr("value");
+		email = $("#email").attr("value");
+		url = $("#url").attr("value");
+		comment = $("#comment").attr("value");
+		$.post("/comment/post/", {
+				post_id: post_id,
+				author : author,
+				email : email,
+				url : url,
+				comment : comment
+		} , function(data) {
+			if(data == 'SUCCESS') {
+				window.location.reload();
+			} else {
+				alert(data);
+			}	
+		});
+	});
+	$(".comment-reply-link").bind("click", function(){
+		reply = "@" + $(this).attr("author") + ": ";
+		$("#comment").attr("value", reply);
+	});
+});

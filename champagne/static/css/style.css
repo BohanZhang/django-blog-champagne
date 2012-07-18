@@ -1980,7 +1980,7 @@ section.ephemera .entry-title a span {
 	top: 0;
 }
 .commentlist > li:before {
-	content: url(images/comment-arrow.png);
+	content: url(/static/images/comment-arrow.png);
 	left: -21px;
 	position: absolute;
 }
